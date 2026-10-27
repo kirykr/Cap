@@ -271,9 +271,6 @@ const INSTANT_RESOLUTION_TIERS: &[(u32, &str, Label)] = &[
     (3840, "4K", tr::settings::quality::instant::res_4k),
 ];
 
-/// `FREE_INSTANT_MODE_MAX_RESOLUTION`.
-const FREE_INSTANT_MODE_MAX_RESOLUTION: u32 = 1280;
-
 #[derive(Clone, Copy)]
 enum InstantQualityNotice {
     SaveFailed,
@@ -3388,11 +3385,6 @@ impl SettingsWindow {
             return;
         };
         self.has_cap_pro = store::auth_snapshot().is_upgraded();
-        if self.instant_resolution_locked(resolution) {
-            cx.open_url(crate::auth::PRICING_URL);
-            cx.notify();
-            return;
-        }
         if store::set_store_setting(
             GENERAL_SETTINGS,
             "instantModeMaxResolution",
@@ -3445,15 +3437,7 @@ impl SettingsWindow {
     }
 
     fn effective_instant_resolution(&self) -> u32 {
-        if self.has_cap_pro {
-            self.settings.instant_mode_max_resolution
-        } else {
-            FREE_INSTANT_MODE_MAX_RESOLUTION
-        }
-    }
-
-    fn instant_resolution_locked(&self, resolution: u32) -> bool {
-        !self.has_cap_pro && resolution > FREE_INSTANT_MODE_MAX_RESOLUTION
+        self.settings.instant_mode_max_resolution
     }
 
     fn render_instant_quality(&self, cx: &mut Context<Self>) -> impl IntoElement {
@@ -3464,21 +3448,11 @@ impl SettingsWindow {
             .find(|(value, _, _)| *value == effective)
             .map(|(_, _, summary)| summary())
             .unwrap_or_default();
-        let description = if self.has_cap_pro {
-            summary
-        } else {
-            tr::settings::quality::instant::free_plan()
-        };
+        let description = summary;
 
         let options = INSTANT_RESOLUTION_TIERS
             .iter()
-            .map(|(value, label, _)| {
-                let mut option = ui::SegmentOption::new(*label, *value == effective);
-                if self.instant_resolution_locked(*value) {
-                    option.icon = Some("icons/lock.svg".into());
-                }
-                option
-            })
+            .map(|(value, label, _)| ui::SegmentOption::new(*label, *value == effective))
             .collect();
 
         let resolution = div()

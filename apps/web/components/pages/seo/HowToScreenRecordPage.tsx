@@ -35,7 +35,7 @@ export const howToScreenRecordContent: SeoPageContent = {
 		{
 			title: "How to Screen Record in Your Browser",
 			description:
-				"Sometimes you need to record your screen without installing any software. Cap offers an Instant Mode that works directly in your browser. Visit <a href='https://cap.so'>cap.so</a> and click Record to start a browser-based recording session. Your browser will ask for permission to access your screen and microphone. Choose which screen, window, or browser tab to share, and Cap begins recording immediately. Instant Mode supports recordings up to 5 minutes on the free plan, with a shareable link generated automatically when you stop recording. This is perfect for quick demos, bug reports, or feedback videos when you do not have the desktop app installed. No downloads, no extensions, and no complicated setup. Just open your browser and start recording.",
+				"Sometimes you need to record your screen without installing any software. Cap offers an Instant Mode that works directly in your browser. Visit <a href='https://cap.so'>cap.so</a> and click Record to start a browser-based recording session. Your browser will ask for permission to access your screen and microphone. Choose which screen, window, or browser tab to share, and Cap begins recording immediately. Instant Mode supports unlimited recording time on the free plan, with a shareable link generated automatically when you stop recording. This is perfect for demos, bug reports, or feedback videos when you do not have the desktop app installed. No downloads, no extensions, and no complicated setup. Just open your browser and start recording.",
 		},
 		{
 			title: "How to Record a Specific Window or Region",
@@ -176,7 +176,7 @@ export const howToScreenRecordContent: SeoPageContent = {
 		{
 			question: "Can I screen record for free?",
 			answer:
-				"Yes, you can screen record for free with Cap. Cap offers a generous <a href='/free-screen-recorder'>free screen recorder</a> plan that includes Studio Mode for personal use with unlimited local recording time and up to 4K resolution. Instant Mode lets you create shareable recordings up to 5 minutes for free, directly from your browser. Other free options include OBS Studio (open-source but complex), the built-in macOS screenshot toolbar, and Windows Xbox Game Bar. Cap provides the best balance of free features, ease of use, and recording quality.",
+				"Yes, you can screen record for free with Cap. Cap offers a generous <a href='/free-screen-recorder'>free screen recorder</a> plan that includes Studio and Instant Modes for personal use with unlimited recording time and up to 4K resolution. Other free options include OBS Studio (open-source but complex), the built-in macOS screenshot toolbar, and Windows Xbox Game Bar. Cap provides the best balance of free features, ease of use, and recording quality.",
 		},
 		{
 			question: "How to screen record on Mac with internal audio?",
@@ -206,7 +206,7 @@ export const howToScreenRecordContent: SeoPageContent = {
 		{
 			question: "How long can I screen record?",
 			answer:
-				"Cap's Studio Mode records locally with no time limit, so you can capture anything from a 30-second demo to a 2-hour training session. On the free plan, Instant Mode — the instantly shareable links — is capped at 5 minutes per recording, and Cap Pro lifts that cap. The macOS built-in recorder and Windows Game Bar have no strict time limits either, though they lack the sharing and editing features that Cap provides.",
+				"All Cap plans support unlimited recording time in Instant Mode and Studio Mode. The macOS built-in recorder and Windows Game Bar also have no strict time limits, though they lack Cap's sharing and editing features.",
 		},
 		{
 			question: "What format do screen recordings save in?",

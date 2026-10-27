@@ -110,7 +110,6 @@ type ActiveRecording = {
 	fps: number;
 	subpath: string;
 	mimeType: string;
-	maxDurationMs: number | null;
 	audioContext?: AudioContext;
 	chunkChain: Promise<void>;
 	dataRequestInterval: number | null;
@@ -640,16 +639,6 @@ const updateStatusDuration = () => {
 	if (!activeRecording) return;
 	const now = Date.now();
 	const durationMs = getRecordingDuration(activeRecording, now);
-	// Enforce the free-plan cap (the floating bar only displays the
-	// countdown); routing through the service worker mirrors a user-initiated
-	// stop so the upload page opens as usual.
-	if (
-		activeRecording.maxDurationMs !== null &&
-		durationMs >= activeRecording.maxDurationMs &&
-		!activeRecording.finalizePromise
-	) {
-		stopRecordingFromTrackEnd();
-	}
 	if (status.phase === "recording") {
 		status = {
 			...status,
@@ -990,12 +979,6 @@ const startRecording = async (request: StartRecordingRequest) => {
 		throwIfStartCanceled();
 
 		const startedAt = Date.now();
-		const plan = request.bootstrap.plan;
-		const maxDurationMs =
-			!plan.isPro && plan.maxRecordingSeconds !== null
-				? plan.maxRecordingSeconds * 1000
-				: null;
-
 		const recording: ActiveRecording = {
 			recorder,
 			stopPromise: Promise.resolve(),
@@ -1018,7 +1001,6 @@ const startRecording = async (request: StartRecordingRequest) => {
 			fps,
 			subpath,
 			mimeType: pipeline.mimeType,
-			maxDurationMs,
 			audioContext,
 			chunkChain: Promise.resolve(),
 			dataRequestInterval: null,

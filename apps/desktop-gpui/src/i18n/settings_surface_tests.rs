@@ -190,10 +190,6 @@ fn settings_surfaces_match_the_literals_they_replaced() {
             "Maximum resolution",
         ),
         (
-            tr::settings::quality::instant::free_plan(),
-            "720p on the free plan. Cap Pro records up to 4K.",
-        ),
-        (
             tr::settings::quality::instant::res_720p(),
             "Smallest uploads, so links are ready fastest.",
         ),

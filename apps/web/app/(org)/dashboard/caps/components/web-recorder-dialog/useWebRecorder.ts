@@ -53,10 +53,7 @@ import { useMediaRecorderSetup } from "./useMediaRecorderSetup";
 import { useRecordingTimer } from "./useRecordingTimer";
 import { useStreamManagement } from "./useStreamManagement";
 import { useSurfaceDetection } from "./useSurfaceDetection";
-import {
-	type DetectedDisplayRecordingMode,
-	FREE_PLAN_MAX_RECORDING_MS,
-} from "./web-recorder-constants";
+import type { DetectedDisplayRecordingMode } from "./web-recorder-constants";
 
 interface UseWebRecorderOptions {
 	organisationId: string | undefined;
@@ -65,7 +62,6 @@ interface UseWebRecorderOptions {
 	systemAudioEnabled: boolean;
 	recordingMode: RecordingMode;
 	selectedCameraId: string | null;
-	isProUser: boolean;
 	onPhaseChange?: (phase: RecorderPhase) => void;
 	onRecordingSurfaceDetected?: (mode: RecordingMode) => void;
 	onRecordingStart?: () => void;
@@ -128,7 +124,6 @@ export const useWebRecorder = ({
 	systemAudioEnabled,
 	recordingMode,
 	selectedCameraId,
-	isProUser,
 	onPhaseChange,
 	onRecordingSurfaceDetected,
 	onRecordingStart,
@@ -250,7 +245,6 @@ export const useWebRecorder = ({
 	const instantChunkModeRef = useRef<InstantChunkingMode | null>(null);
 	const chunkStartGuardTimeoutRef = useRef<number | null>(null);
 	const lastInstantChunkAtRef = useRef<number | null>(null);
-	const freePlanAutoStopTriggeredRef = useRef(false);
 	const shareUrlOpenedRef = useRef(false);
 	const errorDownloadUrlRef = useRef<string | null>(null);
 	const stopInFlightRef = useRef(false);
@@ -601,8 +595,6 @@ export const useWebRecorder = ({
 		},
 		[deleteVideo],
 	);
-
-	const isFreePlan = !isProUser;
 
 	const stopInstantChunkInterval = useCallback(() => {
 		if (!dataRequestIntervalRef.current) return;
@@ -1437,32 +1429,6 @@ export const useWebRecorder = ({
 		console.error("Browser recording stopped unexpectedly", recorderError);
 		void stopRecording();
 	}, [recorderError, phase, stopRecording]);
-
-	useEffect(() => {
-		if (!isFreePlan) {
-			freePlanAutoStopTriggeredRef.current = false;
-			return;
-		}
-
-		const isRecordingPhase = phase === "recording" || phase === "paused";
-		if (!isRecordingPhase) {
-			freePlanAutoStopTriggeredRef.current = false;
-			return;
-		}
-
-		if (
-			durationMs >= FREE_PLAN_MAX_RECORDING_MS &&
-			!freePlanAutoStopTriggeredRef.current
-		) {
-			freePlanAutoStopTriggeredRef.current = true;
-			toast.info(
-				"Free plan recordings are limited to 5 minutes. Recording stopped automatically.",
-			);
-			stopRecording().catch((error) => {
-				console.error("Failed to stop recording at free plan limit", error);
-			});
-		}
-	}, [durationMs, isFreePlan, phase, stopRecording]);
 
 	const restartRecording = useCallback(async () => {
 		if (isRestarting) return;

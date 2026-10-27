@@ -10,25 +10,13 @@ import { Schema } from "effect";
 import { describe, expect, it } from "vitest";
 
 describe("mobile API contract schemas", () => {
-	it("enforces the five-minute free recording limit with segment tolerance", () => {
-		expect(
-			Mobile.isMobileRecordingDurationAllowed({
-				durationSeconds: 305,
-				isPro: false,
-			}),
-		).toBe(true);
-		expect(
-			Mobile.isMobileRecordingDurationAllowed({
-				durationSeconds: 305.01,
-				isPro: false,
-			}),
-		).toBe(false);
-		expect(
-			Mobile.isMobileRecordingDurationAllowed({
-				durationSeconds: 3600,
-				isPro: true,
-			}),
-		).toBe(true);
+	it("allows long recordings while validating the mobile API safety bound", () => {
+		expect(Mobile.isMobileRecordingDurationValid(305)).toBe(true);
+		expect(Mobile.isMobileRecordingDurationValid(3600)).toBe(true);
+		expect(Mobile.isMobileRecordingDurationValid(43_200)).toBe(true);
+		expect(Mobile.isMobileRecordingDurationValid(43_200.01)).toBe(false);
+		expect(Mobile.isMobileRecordingDurationValid(0)).toBe(false);
+		expect(Mobile.isMobileRecordingDurationValid(Number.NaN)).toBe(false);
 	});
 
 	it("decodes bootstrap responses without exposing database rows", () => {

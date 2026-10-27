@@ -64,7 +64,7 @@ export const bestScreenRecorderContent: SeoPageContent = {
 				icon: <Zap fill="yellow" className="mb-4 size-8" strokeWidth={1.5} />,
 				title: "Instant Mode",
 				description:
-					"Record and share your screen in seconds with a link ready the moment you stop. Perfect for bug reports, async updates, and quick demos. Free plan includes recordings up to 5 minutes with built-in thread commenting.",
+					"Record and share your screen in seconds with a link ready the moment you stop. Perfect for bug reports, async updates, and quick demos. Free plan includes unlimited recording length with built-in thread commenting.",
 			},
 			{
 				icon: (
@@ -220,7 +220,7 @@ export const bestScreenRecorderContent: SeoPageContent = {
 		{
 			question: "What is the best free screen recorder?",
 			answer:
-				"Cap is the best free screen recorder available. Studio Mode is 100% free for personal use with unlimited recording time, no watermarks, and no time limits. Instant Mode supports recordings up to 5 minutes on the free plan with instant shareable links. <a href='/free-screen-recorder'>Download Cap's free screen recorder</a> to get started.",
+				"Cap is the best free screen recorder available. Studio and Instant Modes are 100% free for personal use with unlimited recording time, no watermarks, and instant shareable links. <a href='/free-screen-recorder'>Download Cap's free screen recorder</a> to get started.",
 		},
 		{
 			question: "What is the best screen recorder for Mac?",

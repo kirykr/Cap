@@ -329,7 +329,6 @@ ultra_description = "Conserva el máximo detalle para ediciones intensas. Usa m�
 
 [settings.quality.instant]
 description = "Se suben mientras grabas, así que el enlace está listo en cuanto paras. Para la mejor calidad, usa el modo Studio: graba con la máxima calidad que permite tu pantalla y puedes exportar hasta 4K."
-free_plan = "720p en el plan gratuito. Cap Pro graba hasta 4K."
 max_resolution = "Resolución máxima"
 res_1080p = "Texto nítido con un tamaño de subida práctico."
 res_1440p = "Más detalle para pantallas grandes de alta resolución."

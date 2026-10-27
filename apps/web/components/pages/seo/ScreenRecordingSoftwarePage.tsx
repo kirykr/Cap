@@ -67,7 +67,7 @@ export const screenRecordingSoftwareContent: SeoPageContent = {
 				icon: <Zap fill="yellow" className="mb-4 size-8" strokeWidth={1.5} />,
 				title: "Instant Mode",
 				description:
-					"Record and share your screen instantly with a simple link. Perfect for quick demos, bug reports, and async updates. Record up to 5-minute shareable links for free with built-in thread commenting for collaboration.",
+					"Record and share your screen instantly with a simple link. Perfect for quick demos, bug reports, and async updates. Record and share videos of any length for free with built-in thread commenting for collaboration.",
 			},
 			{
 				icon: (
@@ -153,7 +153,7 @@ export const screenRecordingSoftwareContent: SeoPageContent = {
 		{
 			question: "Does Cap offer unlimited recording time?",
 			answer:
-				"Absolutely. Cap's desktop app allows unlimited recording time with no restrictions, ideal for extended presentations, training sessions, or full-length tutorials. Instant Mode supports recordings up to 5 minutes on the free plan.",
+				"Absolutely. Cap supports unlimited recording time in both Studio and Instant Modes on every plan, ideal for extended presentations, training sessions, or full-length tutorials.",
 		},
 		{
 			question: "Can I share recordings with others?",

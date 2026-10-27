@@ -78,7 +78,7 @@ export const googleChromeScreenRecorderContent: SeoPageContent = {
 			],
 			[
 				"Recording length (free)",
-				{ text: "Unlimited (with desktop app)", status: "positive" },
+				{ text: "Unlimited", status: "positive" },
 				{ text: "5 minutes", status: "warning" },
 				{ text: "5 minutes", status: "warning" },
 			],

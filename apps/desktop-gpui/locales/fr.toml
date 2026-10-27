@@ -329,7 +329,6 @@ ultra_description = "Conserve un maximum de détails pour les retouches poussée
 
 [settings.quality.instant]
 description = "Mis en ligne pendant l'enregistrement, le lien est prêt dès que vous arrêtez. Pour une qualité optimale, utilisez le mode Studio : il enregistre dans la meilleure qualité permise par votre écran et vous pouvez exporter jusqu'en 4K."
-free_plan = "720p avec l'offre gratuite. Cap Pro enregistre jusqu'en 4K."
 max_resolution = "Résolution maximale"
 res_1080p = "Texte net pour une taille de mise en ligne raisonnable."
 res_1440p = "Plus de détails pour les grands écrans haute résolution."

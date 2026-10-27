@@ -62,7 +62,7 @@ export const loomAlternativeContent: SeoPageContent = {
 				icon: <Zap fill="yellow" className="mb-4 size-8" strokeWidth={1.5} />,
 				title: "Instant Mode",
 				description:
-					"Share your screen right away with a simple link—no waiting, just record and share in seconds. Record up to 5-minute shareable links for free, perfect for quick demos and explanations. Includes built-in thread commenting for easy collaboration.",
+					"Share your screen right away with a simple link—no waiting, just record and share in seconds. Record shareable videos of any length for free, perfect for quick demos and explanations. Includes built-in thread commenting for easy collaboration.",
 			},
 			{
 				icon: (
@@ -116,7 +116,7 @@ export const loomAlternativeContent: SeoPageContent = {
 		{
 			question: "Is there a free Loom alternative?",
 			answer:
-				"Yes, Cap offers a generous free tier that includes all essential screen recording features. You can use Studio mode completely free for personal use, record up to 5-minute shareable links, and record in up to 4K resolution. Cap's free plan offers more than Loom's free tier.",
+				"Yes, Cap offers a generous free tier that includes all essential screen recording features. You can use Studio mode completely free for personal use, record shareable videos of any length, and record in up to 4K resolution. Cap's free plan offers more than Loom's free tier.",
 		},
 		{
 			question: "Why choose an open-source screen recorder?",
@@ -125,7 +125,7 @@ export const loomAlternativeContent: SeoPageContent = {
 		},
 		{
 			question: "How does Cap compare in pricing with Loom?",
-			answer: `Cap is significantly more affordable at just $${PRICING.pro.annualPerMonth}/month per user when billed annually, compared to Loom's $18/month per user. Cap also has a more generous free plan that includes Studio mode for personal use and the ability to record shareable links up to 5 minutes in 4K quality.`,
+			answer: `Cap is significantly more affordable at just $${PRICING.pro.annualPerMonth}/month per user when billed annually, compared to Loom's $18/month per user. Cap also has a more generous free plan that includes Studio mode for personal use and shareable recordings of any length in 4K quality.`,
 		},
 		{
 			question: "Can I keep full ownership of my recordings with Cap?",

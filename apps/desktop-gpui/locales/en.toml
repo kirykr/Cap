@@ -331,7 +331,6 @@ ultra_description = "Keeps the most detail for heavy editing. Uses the most disk
 
 [settings.quality.instant]
 description = "Uploaded while you record, so the link is ready the moment you stop. For the best quality, use Studio mode: it records at the highest quality your screen allows, and you can export up to 4K."
-free_plan = "720p on the free plan. Cap Pro records up to 4K."
 max_resolution = "Maximum resolution"
 res_1080p = "Sharp text at a practical upload size."
 res_1440p = "Extra detail for large, high-resolution screens."

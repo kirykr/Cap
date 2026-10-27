@@ -2737,9 +2737,7 @@ const completeRecording = Effect.fn("Mobile.completeRecording")(function* (
 	if (
 		!validTrack(videoSegments, true) ||
 		!validTrack(audioSegments, false) ||
-		!Number.isFinite(input.durationSeconds) ||
-		input.durationSeconds <= 0 ||
-		input.durationSeconds > 43_200 ||
+		!Mobile.isMobileRecordingDurationValid(input.durationSeconds) ||
 		!Number.isSafeInteger(input.totalBytes) ||
 		input.totalBytes < 0 ||
 		input.totalBytes > 2_000_000_000_000
@@ -2748,24 +2746,6 @@ const completeRecording = Effect.fn("Mobile.completeRecording")(function* (
 	}
 
 	const database = yield* Database;
-	const [userRow] = yield* database.use((db) =>
-		db
-			.select({
-				stripeSubscriptionStatus: Db.users.stripeSubscriptionStatus,
-				thirdPartyStripeSubscriptionId: Db.users.thirdPartyStripeSubscriptionId,
-			})
-			.from(Db.users)
-			.where(eq(Db.users.id, user.id))
-			.limit(1),
-	);
-	if (
-		!Mobile.isMobileRecordingDurationAllowed({
-			durationSeconds: input.durationSeconds,
-			isPro: userIsPro(userRow),
-		})
-	) {
-		return yield* Effect.fail(new HttpApiError.Forbidden());
-	}
 
 	const storage = yield* Storage;
 	const [bucket] = yield* storage.getAccessForVideo(video);

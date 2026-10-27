@@ -19,7 +19,7 @@ Core principles:
 ### Instant Mode
 - Records and uploads simultaneously; a shareable link is live the moment you stop.
 - Auto-generates a title, summary, clickable chapters, and a transcript.
-- Defaults to 30fps; free tier caps output at 720p, Cap Pro up to 4K.
+- Defaults to 30fps; resolution can be selected up to 4K on every plan.
 - Requires sign-in. Supports pause/resume; can auto-open the share link after stopping.
 - Best for quick feedback, bug reports, and async updates.
 
@@ -41,7 +41,7 @@ Core principles:
 
 - Capture targets: full display, specific window, custom area/region, or camera-only.
 - Audio: microphone (selectable device) and system audio. System-audio capture requires macOS 13.0+ (ScreenCaptureKit); Windows uses WASAPI loopback via the Direct3D pipeline.
-- Resolution: Studio captures at native resolution up to 4K (3840×2160), auto-downscaling anything beyond 4096px. Instant Mode output is plan-capped (720p free, up to 4K Pro).
+- Resolution: Studio captures at native resolution up to 4K (3840×2160), auto-downscaling anything beyond 4096px. Instant Mode resolution is selectable up to 4K on every plan.
 - Frame rate: capture at 30/60/120fps (default 60 Studio, 30 Instant).
 - Encoding: hardware-accelerated H.264 — VideoToolbox on macOS; NVENC / AMF / Quick Sync / Media Foundation on Windows (GPU-vendor aware) — with libx264 software fallback.
 - Capture APIs: ScreenCaptureKit (macOS), Direct3D/DXGI (Windows), X11 + Wayland portal/PipeWire (Linux).
@@ -163,8 +163,8 @@ Current desktop app version: 0.5.3.
 
 ## Pricing
 
-- **Free** — Personal use. Studio Mode with the full local editor, 4K/60fps export, export to any format, team workspaces, community support. Free recordings are limited to 5 minutes; a paid plan is required for commercial use.
-- **Desktop License** — Commercial license for the desktop app: $29/license billed yearly, or $58/license one-time (lifetime). Unlimited local recording & editing, Studio Mode, 20 cloud shareable links/month (up to 5 min each), export to any format, community support.
+- **Free** — Personal use. Studio Mode with the full local editor, 4K/60fps export, export to any format, team workspaces, community support. Recording time is unlimited; a paid plan is required for commercial use.
+- **Desktop License** — Commercial license for the desktop app: $29/license billed yearly, or $58/license one-time (lifetime). Unlimited local recording & editing, Studio Mode, 20 cloud shareable links/month with unlimited recording duration, export to any format, community support.
 - **Cap Pro** — $12/user/month, or $8.16/user/month billed annually (save 32%). Everything in Desktop License plus: unlimited cloud storage & bandwidth; auto-generated titles, summaries, clickable chapters, and transcriptions; custom domain; password-protected shares; viewer analytics & engagement; team workspaces; Loom video importer; custom S3 bucket & Google Drive support; priority support & early features.
 - **Enterprise** — Custom. SLAs & priority support, SAML SSO & SCIM provisioning, managed self-hosting, volume discounts, advanced security controls, dedicated onboarding.
 - **Discounts** — STUDENT50 (30% off, students), MIGRATE20 (20% off first year, Loom switchers); volume discounts for teams over 10 users.

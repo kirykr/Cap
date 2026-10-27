@@ -1,14 +1,7 @@
 import type { DetectedDisplayRecordingMode } from "@cap/recorder-core/recorder-constants";
-import { Video } from "@cap/web-domain";
 import type { RecordingMode } from "./RecordingModeSelector";
 
 export * from "@cap/recorder-core/recorder-constants";
-
-// Derived here rather than in @cap/recorder-core so the framework-agnostic
-// package carries no runtime dependency on the @cap/web-domain barrel (the
-// extension bundles recorder-core and must not pull effect along with it).
-export const FREE_PLAN_MAX_RECORDING_MS =
-	Video.FREE_PLAN_MAX_RECORDING_SECONDS * 1000;
 
 // Compile-time guard: recorder-core can't import RecordingModeSelector, so it
 // hand-writes DetectedDisplayRecordingMode. Fail the build if the two unions

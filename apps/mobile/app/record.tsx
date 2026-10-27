@@ -38,8 +38,7 @@ import {
 	SafeAreaView,
 	useSafeAreaInsets,
 } from "react-native-safe-area-context";
-import { apiBaseUrl, useAuth } from "@/auth/AuthContext";
-import { getProPlan } from "@/billing/pro";
+import { useAuth } from "@/auth/AuthContext";
 import { TeleprompterOverlay } from "@/recording/TeleprompterOverlay";
 import {
 	clamp,
@@ -69,7 +68,6 @@ type RecordingMode = "camera" | "screen";
 const recordingVideoBitrate = 2_500_000;
 const screenRecordingVideoBitrate = 1_800_000;
 const recordingSegmentDurationSeconds = 2;
-const freeRecordingDurationSeconds = 5 * 60;
 const capturePressSpring = { damping: 18, stiffness: 320, mass: 0.7 } as const;
 const recordingMonthNames = [
 	"Jan",
@@ -327,14 +325,9 @@ function StepperRow({
 type RecorderTimerPillProps = {
 	phase: RecorderPhase;
 	startedAt: RefObject<number | null>;
-	durationLimitSeconds: number | null;
 };
 
-function RecorderTimerPill({
-	phase,
-	startedAt,
-	durationLimitSeconds,
-}: RecorderTimerPillProps) {
+function RecorderTimerPill({ phase, startedAt }: RecorderTimerPillProps) {
 	const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
 	useEffect(() => {
@@ -354,11 +347,7 @@ function RecorderTimerPill({
 
 	return (
 		<View
-			accessibilityLabel={
-				durationLimitSeconds === null
-					? `Recording time ${formatRecordingDuration(elapsedSeconds)}`
-					: `Recording time ${formatRecordingDuration(elapsedSeconds)} of ${formatRecordingDuration(durationLimitSeconds)}`
-			}
+			accessibilityLabel={`Recording time ${formatRecordingDuration(elapsedSeconds)}`}
 			style={styles.timerPill}
 		>
 			{phase === "recording" || phase === "finishing" ? (
@@ -366,9 +355,6 @@ function RecorderTimerPill({
 			) : null}
 			<Text style={styles.timerText}>
 				{formatRecordingDuration(elapsedSeconds)}
-				{durationLimitSeconds === null
-					? ""
-					: ` / ${formatRecordingDuration(durationLimitSeconds)}`}
 			</Text>
 		</View>
 	);
@@ -387,7 +373,6 @@ export default function RecordScreen() {
 	const discardRecording = useRef(false);
 	const activeRecordingId = useRef<string | null>(null);
 	const recordingStartedAt = useRef<number | null>(null);
-	const automaticStopStarted = useRef(false);
 	const screenCompletionStarted = useRef(false);
 	const screenPreparationAttempted = useRef(false);
 	const screenUpdateInFlight = useRef(false);
@@ -405,9 +390,6 @@ export default function RecordScreen() {
 	const [screenAvailability, setScreenAvailability] =
 		useState<CapScreenRecorderAvailability | null>(null);
 	const [screenPrepared, setScreenPrepared] = useState(false);
-	const [recordingDurationLimit, setRecordingDurationLimit] = useState<
-		number | null
-	>(freeRecordingDurationSeconds);
 	const [cameraReady, setCameraReady] = useState(false);
 	const [facing, setFacing] = useState<CameraType>("front");
 	const [error, setError] = useState<string | null>(null);
@@ -436,24 +418,6 @@ export default function RecordScreen() {
 	const hasScript = script.trim().length > 0;
 	const waitingForPermission =
 		!permissionStateLoaded || !permissionRequestFinished;
-	const loadRecordingDurationLimit = useCallback(async () => {
-		if (!auth.apiKey) {
-			setRecordingDurationLimit(freeRecordingDurationSeconds);
-			return freeRecordingDurationSeconds;
-		}
-		try {
-			const plan = await getProPlan({
-				apiKey: auth.apiKey,
-				baseUrl: apiBaseUrl,
-			});
-			const limit = plan.upgraded ? null : freeRecordingDurationSeconds;
-			setRecordingDurationLimit(limit);
-			return limit;
-		} catch {
-			setRecordingDurationLimit(freeRecordingDurationSeconds);
-			return freeRecordingDurationSeconds;
-		}
-	}, [auth.apiKey]);
 	const requestPermissions = useCallback(async () => {
 		setPermissionRequestFinished(false);
 		const nextCameraPermission = cameraPermission?.granted
@@ -502,10 +466,6 @@ export default function RecordScreen() {
 	}, [getCameraPermission, getMicrophonePermission, isPhysicalDevice]);
 
 	useEffect(() => {
-		void loadRecordingDurationLimit();
-	}, [loadRecordingDurationLimit]);
-
-	useEffect(() => {
 		if (!isPhysicalDevice) {
 			setScreenAvailability({
 				available: false,
@@ -528,12 +488,10 @@ export default function RecordScreen() {
 	const startRecording = useCallback(async () => {
 		if (!cameraRef.current || !cameraReady || phase !== "ready") return;
 		discardRecording.current = false;
-		automaticStopStarted.current = false;
 		setError(null);
 		setPhase("starting");
 		let createdId: string | null = null;
 		try {
-			await loadRecordingDurationLimit();
 			const created = await recordingUploads.beginRecording({
 				fileName: createRecordingFileName(new Date()),
 				width: 720,
@@ -566,13 +524,7 @@ export default function RecordScreen() {
 			);
 			setPhase("ready");
 		}
-	}, [
-		cameraReady,
-		hasScript,
-		loadRecordingDurationLimit,
-		phase,
-		recordingUploads,
-	]);
+	}, [cameraReady, hasScript, phase, recordingUploads]);
 
 	const prepareScreenCapture = useCallback(async () => {
 		if (
@@ -591,7 +543,6 @@ export default function RecordScreen() {
 		screenCompletionStarted.current = false;
 		let createdId: string | null = null;
 		try {
-			const durationLimit = await loadRecordingDurationLimit();
 			const created = await recordingUploads.beginRecording({
 				fileName: createRecordingFileName(new Date()),
 				width: 720,
@@ -607,7 +558,7 @@ export default function RecordScreen() {
 				height: 1280,
 				videoBitrate: screenRecordingVideoBitrate,
 				segmentDurationSeconds: recordingSegmentDurationSeconds,
-				maximumDurationSeconds: durationLimit,
+				maximumDurationSeconds: null,
 			});
 			setScreenPrepared(true);
 			setPhase("ready");
@@ -627,7 +578,6 @@ export default function RecordScreen() {
 		}
 	}, [
 		auth.apiKey,
-		loadRecordingDurationLimit,
 		mode,
 		phase,
 		recordingUploads,
@@ -834,30 +784,6 @@ export default function RecordScreen() {
 			setPhase("ready");
 		}
 	}, [phase, recordingUploads]);
-
-	useEffect(() => {
-		if (
-			mode !== "camera" ||
-			phase !== "recording" ||
-			recordingDurationLimit === null
-		) {
-			return;
-		}
-		const stopAtLimit = () => {
-			if (
-				recordingStartedAt.current === null ||
-				automaticStopStarted.current ||
-				Date.now() - recordingStartedAt.current < recordingDurationLimit * 1000
-			) {
-				return;
-			}
-			automaticStopStarted.current = true;
-			void stopRecording();
-		};
-		stopAtLimit();
-		const interval = setInterval(stopAtLimit, 250);
-		return () => clearInterval(interval);
-	}, [mode, phase, recordingDurationLimit, stopRecording]);
 
 	const closeRecorder = useCallback(() => {
 		if (mode === "screen") {
@@ -1072,11 +998,7 @@ export default function RecordScreen() {
 					onPress={closeRecorder}
 					symbol="xmark"
 				/>
-				<RecorderTimerPill
-					durationLimitSeconds={recordingDurationLimit}
-					phase={phase}
-					startedAt={recordingStartedAt}
-				/>
+				<RecorderTimerPill phase={phase} startedAt={recordingStartedAt} />
 				<View style={styles.topBarSpacer} />
 			</View>
 			{mode === "camera" && hasScript && permissionsGranted ? (

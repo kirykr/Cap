@@ -64,7 +64,7 @@ export const videoRecordingSoftwareContent: SeoPageContent = {
 				icon: <Zap fill="yellow" className="mb-4 size-8" strokeWidth={1.5} />,
 				title: "Instant Mode",
 				description:
-					"Record and get a shareable link the moment you stop. Perfect for quick demos, bug reports, and async team updates. Free plan includes video recordings up to 5 minutes with built-in thread commenting.",
+					"Record and get a shareable link the moment you stop. Perfect for quick demos, bug reports, and async team updates. Free plan includes unlimited recording length with built-in thread commenting.",
 			},
 			{
 				icon: (
@@ -220,11 +220,11 @@ export const videoRecordingSoftwareContent: SeoPageContent = {
 		{
 			question: "What is the best free video recording software?",
 			answer:
-				"Cap is the best free video recording software for most users. Studio Mode is 100% free for personal use with no watermarks, no time limits, and up to 4K recording quality. Instant Mode supports recordings up to 5 minutes on the free plan with instant shareable links. <a href='/free-screen-recorder'>Download Cap's free recorder</a> to get started.",
+				"Cap is the best free video recording software for most users. Studio and Instant Modes are 100% free for personal use with no watermarks, unlimited recording time, up to 4K recording quality, and instant shareable links. <a href='/free-screen-recorder'>Download Cap's free recorder</a> to get started.",
 		},
 		{
 			question: "Is Cap video recording software free?",
-			answer: `Yes. Cap's Studio Mode is completely free for personal use with no time limits, no watermarks, and no hidden fees. Instant Mode is free for recordings up to 5 minutes. Cap Pro at $${PRICING.pro.annualPerMonth}/month removes Instant Mode limits and adds team features — but the core video recording software is free to use forever.`,
+			answer: `Yes. Cap's Studio and Instant Modes are free for personal use with unlimited recording time, no watermarks, and no hidden fees. Cap Pro at $${PRICING.pro.annualPerMonth}/month adds team features — but the core video recording software is free to use forever.`,
 		},
 		{
 			question: "Does Cap video recording software work on Mac and Windows?",

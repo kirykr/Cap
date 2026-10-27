@@ -190,7 +190,6 @@ const createMockCapServer = async () => {
 					},
 					plan: {
 						isPro: true,
-						maxRecordingSeconds: 600,
 					},
 				});
 				return;
@@ -421,7 +420,6 @@ const configureExtension = async (
 								},
 								plan: {
 									isPro: true,
-									maxRecordingSeconds: 600,
 								},
 							},
 							cachedAt: Date.now(),

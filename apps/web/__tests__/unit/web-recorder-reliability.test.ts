@@ -242,7 +242,6 @@ describe("web recording upload recovery", () => {
 				systemAudioEnabled,
 				recordingMode,
 				selectedCameraId: "camera",
-				isProUser: true,
 			});
 			return recorder.isMicrophoneUnavailable
 				? createElement(MicrophoneUnavailablePrompt, {

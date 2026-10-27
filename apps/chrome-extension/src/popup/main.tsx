@@ -568,16 +568,8 @@ function App() {
 		if (!IS_EMBEDDED) window.close();
 	};
 
-	const maxRecordingMs =
-		bootstrap && bootstrap.plan.maxRecordingSeconds !== null
-			? bootstrap.plan.maxRecordingSeconds * 1000
-			: null;
 	const recordingTimerDisplayMs =
-		recordingActive && status.phase !== "uploading"
-			? isPro || maxRecordingMs === null
-				? status.durationMs
-				: Math.max(0, maxRecordingMs - status.durationMs)
-			: 0;
+		recordingActive && status.phase !== "uploading" ? status.durationMs : 0;
 
 	const recordingBarStatus = recordingActive
 		? status.phase === "uploading"

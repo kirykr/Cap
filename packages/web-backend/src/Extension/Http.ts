@@ -1,11 +1,5 @@
 import { serverEnv } from "@cap/env";
-import {
-	CurrentUser,
-	Extension,
-	Http,
-	type User,
-	Video,
-} from "@cap/web-domain";
+import { CurrentUser, Extension, Http, type User } from "@cap/web-domain";
 import {
 	HttpApiBuilder,
 	HttpApiError,
@@ -348,9 +342,6 @@ export const ExtensionHttpLive = HttpApiBuilder.group(
 							},
 							plan: {
 								isPro,
-								maxRecordingSeconds: isPro
-									? null
-									: Video.FREE_PLAN_MAX_RECORDING_SECONDS,
 							},
 						};
 					}).pipe(handleDomainError),

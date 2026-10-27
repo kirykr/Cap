@@ -765,13 +765,12 @@ ffmpeg -hide_banner -nostdin -y -hwaccel cuda -i in.mp4 -map 0:v:0 -an -fps_mode
 | `DEFAULT_STUDIO_MAX_FPS` | 60 |
 | `CAMERA_ACTIVE_STUDIO_MAX_FPS` | 30 |
 | `DEFAULT_INSTANT_MODE_FPS` | 30 |
-| `FREE_INSTANT_MODE_MAX_RESOLUTION` | 1280 |
-| `PRO_INSTANT_MODE_MAX_RESOLUTION` | 1920 |
+| `DEFAULT_INSTANT_MODE_MAX_RESOLUTION` | 1920 |
 | `DEFAULT_CRASH_RECOVERY_RECORDING` | true, so fragmented recording is the default |
 | `DEFAULT_OUT_OF_PROCESS_MUXER` | false |
 
 - Default studio quality is `Compatibility` if total RAM is under 16 GiB, else `Balanced`. `Ultra` is opt-in.
-- Instant mode clamps the output to fit `(max, max*9/16)`: 1280x720 for free users, 1920x1080 for Pro (`instant_recording.rs` lines 719-734).
+- Instant mode defaults to 1920x1080 and offers resolution settings up to 4K without a plan-based resolution cap.
 
 **Timestamps (all `enc-ffmpeg` recording paths):**
 - `VideoInfo.time_base = 1/1_000_000` (`crates/media-info/src/lib.rs` lines 47, 58, 89).

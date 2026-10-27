@@ -369,9 +369,8 @@ export const homepageCopy: HomePageCopy = {
 					"Yes! Cap is 100% free for personal use. You can record and share locally with Studio Mode. A paid plan is required for commercial usage.",
 			},
 			{
-				question: "How long can I record for on the free version?",
-				answer:
-					"Studio Mode lets you record locally without a time limit. Free cloud shareable links are limited to 5 minutes each.",
+				question: "How long can I record for?",
+				answer: "Free accounts can record and share videos of any length.",
 			},
 			{
 				question: "How does Cap AI work?",

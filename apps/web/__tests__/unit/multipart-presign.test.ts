@@ -525,34 +525,20 @@ describe("desktop reupload completion", () => {
 		},
 	);
 	it.each(["s3", "googleDrive"] as const)(
-		"rejects over-limit %s replacement without changing original playback",
+		"allows long %s replacements",
 		async (storageProvider) => {
 			provider = storageProvider;
 			mintToken();
-			expect(
-				(
-					await complete(
-						true,
-						token,
-						Video.FREE_PLAN_MAX_RECORDING_SECONDS + 100,
-					)
-				).status,
-			).toBe(403);
+			expect((await complete(true, token, 400)).status).toBe(200);
 			expect(uploadKey).toBeNull();
-			expect(video.source.outputKey).toBe(oldKey);
+			expect(video.source.outputKey).toBe(outputKey);
 			expect(objects.get(oldKey)?.ETag).toBe("original");
-			if (provider === "googleDrive")
-				expect(mocks.abort).not.toHaveBeenCalled();
-			else
-				expect(mocks.abort).toHaveBeenCalledWith(outputKey, "backend-upload");
+			expect(mocks.abort).not.toHaveBeenCalled();
 		},
 	);
-	it("preserves a newer upload when rejecting an older over-limit replacement", async () => {
+	it("does not bypass replacement ownership checks for long recordings", async () => {
 		uploadKey = "newer-operation";
-		expect(
-			(await complete(true, token, Video.FREE_PLAN_MAX_RECORDING_SECONDS + 100))
-				.status,
-		).toBe(403);
+		expect((await complete(true, token, 400)).status).toBe(500);
 		expect(uploadKey).toBe("newer-operation");
 	});
 	it("restarts a legacy session without completing its canonical object", async () => {

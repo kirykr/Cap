@@ -162,7 +162,7 @@ const instantModeConfig: FeaturePageConfig = {
 						"Automatic transcriptions",
 						"Comment & feedback tools",
 						"Team collaboration",
-						"5-minute free recordings*",
+						"Unlimited recording length",
 						"Browser-based viewing",
 					],
 					bestFor: "Quick updates, feedback, team communication",
@@ -229,7 +229,7 @@ const instantModeConfig: FeaturePageConfig = {
 				{
 					question: "How long can I record for free in Instant Mode?",
 					answer:
-						"Free accounts can record up to 5 minutes per recording in Instant Mode. Upgrade to Cap Pro for unlimited recording length, unlimited storage, and advanced collaboration features.",
+						"Free accounts can record for as long as they need. Cap Pro adds advanced collaboration features.",
 				},
 				{
 					question: "Are my recordings secure in Instant Mode?",

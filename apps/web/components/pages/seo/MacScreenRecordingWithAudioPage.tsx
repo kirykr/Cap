@@ -63,7 +63,7 @@ export const macScreenRecordingWithAudioContent: SeoPageContent = {
 				icon: <Zap fill="yellow" className="mb-4 size-8" strokeWidth={1.5} />,
 				title: "Instant Mode",
 				description:
-					"Record your Mac screen with audio and get a shareable link the moment you stop. Perfect for quick demos, bug reports, and async team updates. Free plan includes recordings up to 5 minutes with built-in thread commenting.",
+					"Record your Mac screen with audio and get a shareable link the moment you stop. Perfect for quick demos, bug reports, and async team updates. Free plan includes unlimited recording length with built-in thread commenting.",
 			},
 			{
 				icon: (
@@ -249,7 +249,7 @@ export const macScreenRecordingWithAudioContent: SeoPageContent = {
 		{
 			question: "Is there a free way to record Mac screen with audio?",
 			answer:
-				"Yes. Cap is completely free for Mac screen recording with audio. Studio Mode has no time limits, no watermarks, and no fees. Instant Mode on the free plan supports recordings up to 5 minutes with shareable links. <a href='/free-screen-recorder'>Download Cap free</a> and start recording your Mac with audio today.",
+				"Yes. Cap is completely free for Mac screen recording with audio. Studio and Instant Modes have unlimited recording time, no watermarks, and no fees. <a href='/free-screen-recorder'>Download Cap free</a> and start recording your Mac with audio today.",
 		},
 		{
 			question: "Does Cap record Mac screen with audio in 4K?",

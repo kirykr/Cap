@@ -348,7 +348,7 @@ describe("RecordScreen", () => {
 		).toBeTruthy();
 		expect(
 			renderer.root.findByProps({
-				accessibilityLabel: "Recording time 0:00 of 5:00",
+				accessibilityLabel: "Recording time 0:00",
 			}),
 		).toBeTruthy();
 	});
@@ -459,7 +459,7 @@ describe("RecordScreen", () => {
 			height: 1280,
 			videoBitrate: 1_800_000,
 			segmentDurationSeconds: 2,
-			maximumDurationSeconds: 300,
+			maximumDurationSeconds: null,
 		});
 		expect(renderer.root.findByType(CapScreenRecorderView)).toBeTruthy();
 	});
@@ -663,7 +663,7 @@ describe("RecordScreen", () => {
 		expect(routerState.back).not.toHaveBeenCalled();
 	});
 
-	it("automatically stops Free plan recordings at five minutes", async () => {
+	it("allows Free plan recordings to continue beyond five minutes", async () => {
 		vi.useFakeTimers();
 		vi.setSystemTime(new Date("2026-07-23T10:00:00.000Z"));
 		try {
@@ -687,8 +687,8 @@ describe("RecordScreen", () => {
 				await flushMicrotasks();
 			});
 
-			expect(cameraState.stopRecording).toHaveBeenCalledTimes(1);
-			expect(uploadState.finishRecording).toHaveBeenCalledTimes(1);
+			expect(cameraState.stopRecording).not.toHaveBeenCalled();
+			expect(uploadState.finishRecording).not.toHaveBeenCalled();
 		} finally {
 			vi.useRealTimers();
 		}

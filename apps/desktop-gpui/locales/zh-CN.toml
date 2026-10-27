@@ -329,7 +329,6 @@ ultra_description = "保留最多细节，适合大量编辑。占用的磁盘�
 
 [settings.quality.instant]
 description = "录制时同步上传，停止录制时链接即可使用。如需最佳画质，请使用 Studio 模式：它会以屏幕支持的最高画质录制，并可导出最高 4K。"
-free_plan = "免费版为 720p。Cap Pro 最高可录制 4K。"
 max_resolution = "最高分辨率"
 res_1080p = "文字清晰，上传体积适中。"
 res_1440p = "为高分辨率大屏幕提供更多细节。"

@@ -261,11 +261,7 @@ function PlanStatusButton({
 				<Text style={styles.planStatusTitle}>
 					{isPro ? "Cap Pro" : "Free plan"}
 				</Text>
-				<Text style={styles.planStatusDetail}>
-					{isPro
-						? "Unlimited recording time"
-						: "Free plan · Recordings are limited to 5 minutes"}
-				</Text>
+				<Text style={styles.planStatusDetail}>Unlimited recording time</Text>
 			</View>
 		</>
 	);
@@ -279,7 +275,7 @@ function PlanStatusButton({
 				accessibilityValue={{
 					text: isPro
 						? "Cap Pro. Unlimited recording time"
-						: "Free plan. Recordings are limited to 5 minutes",
+						: "Free plan. Unlimited recording time",
 				}}
 				style={styles.planStatusButton}
 			>

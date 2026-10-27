@@ -43,7 +43,6 @@ export class CapRecorder {
 	private accumulatedMs = 0;
 	private lastResumeTime = 0;
 	private selectedMimeType = "";
-	private maxDurationMs: number;
 	private maxDurationTimeout: ReturnType<typeof setTimeout> | null = null;
 	private client: MultipartClient;
 	private listeners = new Map<
@@ -57,7 +56,6 @@ export class CapRecorder {
 			apiBase: options.apiBase ?? DEFAULT_API_BASE,
 			mode: options.mode ?? "fullscreen",
 		};
-		this.maxDurationMs = options.maxDurationMs ?? 4 * 60 * 60 * 1000;
 		this.client = new MultipartClient(
 			this.options.apiBase,
 			this.options.publicKey,
@@ -115,7 +113,7 @@ export class CapRecorder {
 		if (this._phase !== "idle") {
 			throw new Error(`Cannot start from phase "${this._phase}"`);
 		}
-		const maxDurationMs = options?.maxDurationMs ?? this.maxDurationMs;
+		const maxDurationMs = options?.maxDurationMs ?? this.options.maxDurationMs;
 		const startup = new AbortController();
 		this.startup = startup;
 
@@ -181,7 +179,9 @@ export class CapRecorder {
 			this.accumulatedMs = 0;
 			this.lastResumeTime = Date.now();
 			this.startDurationTimer();
-			this.maxDurationTimeout = setTimeout(stop, maxDurationMs);
+			if (maxDurationMs !== undefined) {
+				this.maxDurationTimeout = setTimeout(stop, maxDurationMs);
+			}
 			this.setPhase("recording");
 		} catch (error) {
 			if (startup.signal.aborted) return;

@@ -1,50 +1,29 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { Video } from "@cap/web-domain";
 import { describe, expect, it } from "vitest";
 import {
 	isAgentUploadAllowedForMeasuredDuration,
-	isAgentUploadAllowedForPlan,
+	isAgentUploadDurationValid,
 } from "@/lib/agent-upload-entitlement";
 
-describe("agent upload entitlement", () => {
-	it("allows declared Free-plan durations up to five minutes", () => {
-		expect(
-			isAgentUploadAllowedForPlan({ durationSeconds: 1, isPro: false }),
-		).toBe(true);
-		expect(
-			isAgentUploadAllowedForPlan({
-				durationSeconds: Video.FREE_PLAN_MAX_RECORDING_SECONDS,
-				isPro: false,
-			}),
-		).toBe(true);
-		expect(
-			isAgentUploadAllowedForPlan({ durationSeconds: 0, isPro: false }),
-		).toBe(true);
-		expect(
-			isAgentUploadAllowedForPlan({ durationSeconds: undefined, isPro: false }),
-		).toBe(false);
-		expect(
-			isAgentUploadAllowedForPlan({
-				durationSeconds: Video.FREE_PLAN_MAX_RECORDING_SECONDS + 0.001,
-				isPro: false,
-			}),
-		).toBe(false);
+describe("agent upload duration validation", () => {
+	it("allows any finite nonnegative declared duration, including an omitted duration", () => {
+		expect(isAgentUploadDurationValid(1)).toBe(true);
+		expect(isAgentUploadDurationValid(301)).toBe(true);
+		expect(isAgentUploadDurationValid(0)).toBe(true);
+		expect(isAgentUploadDurationValid(undefined)).toBe(true);
+		expect(isAgentUploadDurationValid(-1)).toBe(false);
+		expect(isAgentUploadDurationValid(Number.NaN)).toBe(false);
 	});
 
-	it("requires a positive server-measured duration within the Free limit", () => {
+	it("requires a positive finite server-measured duration", () => {
 		expect(
 			isAgentUploadAllowedForMeasuredDuration({
-				durationSeconds: Video.FREE_PLAN_MAX_RECORDING_SECONDS,
+				durationSeconds: 301,
 				isPro: false,
 			}),
 		).toBe(true);
-		for (const durationSeconds of [
-			0,
-			Number.NaN,
-			Number.POSITIVE_INFINITY,
-			Video.FREE_PLAN_MAX_RECORDING_SECONDS + 0.001,
-		]) {
+		for (const durationSeconds of [0, Number.NaN, Number.POSITIVE_INFINITY]) {
 			expect(
 				isAgentUploadAllowedForMeasuredDuration({
 					durationSeconds,
@@ -54,25 +33,16 @@ describe("agent upload entitlement", () => {
 		}
 	});
 
-	it("preserves unrestricted Pro uploads", () => {
-		expect(
-			isAgentUploadAllowedForPlan({ durationSeconds: undefined, isPro: true }),
-		).toBe(true);
-		expect(
-			isAgentUploadAllowedForPlan({
-				durationSeconds: Video.FREE_PLAN_MAX_RECORDING_SECONDS + 1,
-				isPro: true,
-			}),
-		).toBe(true);
+	it("does not cap long measured recordings", () => {
 		expect(
 			isAgentUploadAllowedForMeasuredDuration({
-				durationSeconds: Number.NaN,
-				isPro: true,
+				durationSeconds: 4 * 60 * 60,
+				isPro: false,
 			}),
 		).toBe(true);
 	});
 
-	it("checks the plan before creating a storage upload target", () => {
+	it("validates optional duration metadata before creating a storage upload target", () => {
 		const source = readFileSync(
 			join(process.cwd(), "app/api/v1/[...route]/route.ts"),
 			"utf8",
@@ -81,16 +51,11 @@ describe("agent upload entitlement", () => {
 			source.indexOf('.handle("createUpload"'),
 			source.indexOf('.handle("completeUpload"'),
 		);
-		const entitlementCheck = uploadSource.indexOf(
-			"isAgentUploadAllowedForPlan",
-		);
+		const entitlementCheck = uploadSource.indexOf("isAgentUploadDurationValid");
 
 		expect(entitlementCheck).toBeGreaterThan(-1);
-		expect(uploadSource).toContain("userIsPro(account)");
-		expect(source).toContain(
-			"Free plan uploads require a recording duration of 5 minutes or less",
-		);
-		expect(uploadSource).toContain("AGENT_UPLOAD_PLAN_LIMIT_MESSAGE");
+		expect(uploadSource).toContain("AGENT_UPLOAD_INVALID_DURATION_MESSAGE");
+		expect(uploadSource).not.toContain("isAgentUploadAllowedForPlan");
 		expect(uploadSource).toContain('agentUpload: { state: "pending" }');
 		expect(uploadSource).toContain("agentUploadPendingRawFileKey");
 		expect(uploadSource).not.toContain("raw-upload.mp4");
@@ -127,6 +92,7 @@ describe("agent upload entitlement", () => {
 		expect(completionSource).toContain(
 			"isAgentUploadAllowedForMeasuredDuration",
 		);
+		expect(completionSource).toContain("AGENT_UPLOAD_INVALID_DURATION_MESSAGE");
 		expect(completionSource).toMatch(
 			/agentUploadVerifiedRawFileKey\(\s*principal\.id,\s*path\.id,\s*requestId,/,
 		);

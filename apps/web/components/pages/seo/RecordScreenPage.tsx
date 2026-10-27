@@ -64,7 +64,7 @@ export const recordScreenContent: SeoPageContent = {
 				icon: <Zap fill="yellow" className="mb-4 size-8" strokeWidth={1.5} />,
 				title: "Instant Mode",
 				description:
-					"Record your screen and share instantly with a link. The fastest way to capture async updates, bug reports, and quick demos. Free plan includes recordings up to 5 minutes with built-in thread commenting.",
+					"Record your screen and share instantly with a link. The fastest way to capture async updates, bug reports, and quick demos. Free plan includes unlimited recording length with built-in thread commenting.",
 			},
 			{
 				icon: (
@@ -210,7 +210,7 @@ export const recordScreenContent: SeoPageContent = {
 		{
 			question: "Is it free to record your screen with Cap?",
 			answer:
-				"Yes. Cap's Studio Mode is completely free for personal use with unlimited recording time, no watermarks, and no time limits. Instant Mode on the free plan supports recordings up to 5 minutes with instant shareable links and thread commenting. <a href='/free-screen-recorder'>Download Cap's free screen recorder</a> to get started.",
+				"Yes. Cap's Studio and Instant Modes are completely free for personal use with unlimited recording time, no watermarks, instant shareable links, and thread commenting. <a href='/free-screen-recorder'>Download Cap's free screen recorder</a> to get started.",
 		},
 		{
 			question: "Can I record my screen and webcam at the same time?",
@@ -235,7 +235,7 @@ export const recordScreenContent: SeoPageContent = {
 		{
 			question: "Is there a time limit when recording your screen with Cap?",
 			answer:
-				"Studio Mode in Cap has no time limit on screen recordings — record as long as you need completely free. Instant Mode on the free plan supports recordings up to 5 minutes. Upgrading to Cap Pro removes this limit for Instant Mode as well.",
+				"All Cap plans support unlimited recording time in both Studio Mode and Instant Mode.",
 		},
 		{
 			question: "How do I share a screen recording?",

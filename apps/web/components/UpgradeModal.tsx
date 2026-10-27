@@ -7,7 +7,6 @@ import { useMutation } from "@tanstack/react-query";
 import { useCurrency } from "hooks/useCurrency";
 import {
 	BarChart3,
-	Clock,
 	Cloud,
 	Database,
 	Globe,
@@ -77,11 +76,6 @@ const PRO_FEATURES = [
 		icon: <Link2 className={iconStyling} />,
 		title: "Unlimited shareable links",
 		description: "No monthly limit, every video is instantly shareable",
-	},
-	{
-		icon: <Clock className={iconStyling} />,
-		title: "Unlimited recording length",
-		description: "The 5 minute free recording cap is removed",
 	},
 	{
 		icon: <Cloud className={iconStyling} />,

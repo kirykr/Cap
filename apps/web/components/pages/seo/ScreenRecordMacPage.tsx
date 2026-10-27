@@ -92,7 +92,7 @@ export const screenRecordMacContent = {
 		{
 			question: "Can I use Cap for free on Mac?",
 			answer:
-				"Yes. Cap is free for Mac, including Studio Mode recording with no time limit and high-quality capture. Free Instant Mode share links are capped at 5 minutes per recording.",
+				"Yes. Cap is free for Mac, including Studio and Instant Mode recording with no time limit and high-quality capture.",
 		},
 		{
 			question: "What are the best uses for Cap on Mac?",

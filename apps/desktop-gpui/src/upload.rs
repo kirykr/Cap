@@ -1393,9 +1393,6 @@ async fn upload_exported_video_inner(
     }
 
     let metadata = build_video_meta(&file_path)?;
-    if !crate::store::auth_snapshot().is_upgraded() && metadata.duration_in_secs > 300.0 {
-        return Ok((UploadResult::UpgradeRequired, None));
-    }
 
     progress(0.0);
     if cancel.load(Ordering::Relaxed) {

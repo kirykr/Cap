@@ -1077,17 +1077,10 @@ impl EditorWindow {
     }
 
     fn start_link_export(&mut self, window: &mut Window, cx: &mut Context<Self>) {
-        let duration = self.total_duration();
         let Some(ui) = self.export.as_mut() else {
             return;
         };
         if ui.phase.is_busy() || ui.close_requested {
-            return;
-        }
-
-        let upgraded = store::auth_snapshot().is_upgraded();
-        if !upgraded && duration >= 300.0 {
-            cx.open_url(crate::auth::PRICING_URL);
             return;
         }
 

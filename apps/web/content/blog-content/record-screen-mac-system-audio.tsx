@@ -205,7 +205,7 @@ export const recordScreenMacContent = {
 		{
 			question: "Is there a time limit on recordings?",
 			answer:
-				"Cap's Studio Mode records locally with no time limit — record for as long as you need and export the full length. On the free plan, Instant Mode (the instantly shareable links) is capped at 5 minutes per recording; upgrading lifts that cap.",
+				"All plans support unlimited recording time in Studio Mode and Instant Mode.",
 		},
 		{
 			question: "Can I record system audio and my microphone at the same time?",

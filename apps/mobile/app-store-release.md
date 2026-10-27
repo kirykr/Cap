@@ -13,7 +13,7 @@ Cap Mobile is currently an iPhone-only Expo app. Android remains outside this re
 - [x] Remove the external Cap Pro checkout action from the iOS account screen before review. Existing entitlements remain available in version 1.0.
 - [x] Remove external purchase calls to action from Pro-gated Analytics and Loom Import states.
 - [x] Let a signed-in user initiate permanent account deletion from Account settings.
-- [x] Enforce the advertised five-minute free recording limit in both the recorder and the authenticated mobile API.
+- [x] Verify that free-plan recording time is unlimited in the recorder and authenticated mobile API.
 - [x] Let users report a Cap and block another Cap owner in-app.
 - [ ] Deploy the mobile API changes before distributing the release build.
 - [ ] Provide App Review contact details, a durable review account, and reviewer instructions in App Store Connect. Do not commit review credentials.
@@ -133,7 +133,7 @@ Tell the reviewer:
 - Google and Apple login are available on iOS when their production OAuth credentials are configured; users can also sign in with email code or enterprise SSO.
 - The iPhone recorder captures camera and microphone video; it does not capture the iPhone screen.
 - Photos and Files access is requested only when the user chooses an import or save action.
-- Free accounts can record for up to five minutes.
+- Free accounts have unlimited recording time.
 - Account deletion is under Account settings, signs the user out immediately, blocks re-login, and explains the 30-day deletion and direct-subscription cancellation process before confirmation.
 - Existing Cap Pro entitlements are recognized in Account settings; version 1.0 does not sell digital features in the app.
 - Cap is an authenticated collaboration tool without a public discovery feed or anonymous chat. Every Cap detail screen includes in-app reporting and blocking; reports enter the monitored support queue for prompt review.
@@ -157,6 +157,6 @@ After the build reaches App Store Connect:
 
 1. Confirm the matching mobile API changes are deployed to production.
 2. Install the exact build through TestFlight on a physical iPhone.
-3. Test fresh install, Google, Apple, email, and SSO login, recording permissions, a five-minute boundary, background and interrupted uploads, imports, playback, comments, analytics, existing Pro recognition, content reporting and blocking with two disposable accounts, and account deletion with a disposable account.
+3. Test fresh install, Google, Apple, email, and SSO login, recording permissions, recordings longer than five minutes, background and interrupted uploads, imports, playback, comments, analytics, existing Pro recognition, content reporting and blocking with two disposable accounts, and account deletion with a disposable account.
 4. Verify the app icon, privacy manifest, export-compliance status, screenshots, metadata, privacy answers, age rating, review account, and review notes.
 5. Submit manually and release manually after approval.

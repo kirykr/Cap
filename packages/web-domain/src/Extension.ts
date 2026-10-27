@@ -48,8 +48,6 @@ export const ExtensionBootstrapSuccess = Schema.Struct({
 	}),
 	plan: Schema.Struct({
 		isPro: Schema.Boolean,
-		// null = unlimited (Pro)
-		maxRecordingSeconds: Schema.NullOr(Schema.Number),
 	}),
 });
 

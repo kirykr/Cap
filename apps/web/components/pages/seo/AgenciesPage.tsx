@@ -266,7 +266,7 @@ export const agenciesContent: SeoPageContent = {
 		},
 		{
 			question: "How long can we record on the free version?",
-			answer: `The free version supports recordings up to 5 minutes. For longer client presentations and unlimited recording time, upgrade to Cap Pro at $${PRICING.pro.annualPerMonth}/month (billed annually).`,
+			answer: `All plans support unlimited recording time. Cap Pro adds advanced collaboration features at $${PRICING.pro.annualPerMonth}/month (billed annually).`,
 		},
 		{
 			question: "Is Cap secure enough for confidential client work?",

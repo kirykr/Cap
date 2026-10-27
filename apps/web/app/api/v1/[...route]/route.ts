@@ -107,7 +107,7 @@ import {
 } from "@/lib/agent-token";
 import {
 	isAgentUploadAllowedForMeasuredDuration,
-	isAgentUploadAllowedForPlan,
+	isAgentUploadDurationValid,
 } from "@/lib/agent-upload-entitlement";
 import {
 	createAgentFeedback,
@@ -291,10 +291,10 @@ const commonError = (requestId: string, message: string) => ({
 	requestId,
 });
 
-const AGENT_UPLOAD_PLAN_LIMIT_MESSAGE =
-	"Free plan uploads require a recording duration of 5 minutes or less. Upgrade to Cap Pro to upload longer recordings.";
+const AGENT_UPLOAD_INVALID_DURATION_MESSAGE =
+	"The uploaded recording has an invalid duration.";
 const AGENT_UPLOAD_PENDING_FILE_NAME = "agent-upload.mp4";
-const AGENT_UPLOAD_REJECTION_ERROR = "AGENT_UPLOAD_DURATION_LIMIT_EXCEEDED";
+const AGENT_UPLOAD_REJECTION_ERROR = "AGENT_UPLOAD_DURATION_INVALID";
 
 const agentUploadPendingRawFileKey = (
 	ownerId: string,
@@ -6517,27 +6517,10 @@ const AgentManagementHandlersLive = HttpApiBuilder.group(
 								return yield* forbidden(requestId);
 							}
 						}
-						const database = yield* Database;
-						const [account] = yield* database.use((db) =>
-							db
-								.select({
-									stripeSubscriptionStatus: Db.users.stripeSubscriptionStatus,
-									thirdPartyStripeSubscriptionId:
-										Db.users.thirdPartyStripeSubscriptionId,
-								})
-								.from(Db.users)
-								.where(eq(Db.users.id, principal.id))
-								.limit(1),
-						);
-						if (
-							!isAgentUploadAllowedForPlan({
-								durationSeconds: payload.durationSeconds,
-								isPro: userIsPro(account),
-							})
-						) {
-							return yield* forbidden(
+						if (!isAgentUploadDurationValid(payload.durationSeconds)) {
+							return yield* badRequest(
 								requestId,
-								AGENT_UPLOAD_PLAN_LIMIT_MESSAGE,
+								AGENT_UPLOAD_INVALID_DURATION_MESSAGE,
 							);
 						}
 						const storage = yield* Storage;
@@ -6840,7 +6823,7 @@ const AgentManagementHandlersLive = HttpApiBuilder.group(
 							yield* deleteRejectedUpload();
 							return yield* forbidden(
 								requestId,
-								AGENT_UPLOAD_PLAN_LIMIT_MESSAGE,
+								AGENT_UPLOAD_INVALID_DURATION_MESSAGE,
 							);
 						}
 						let acceptedRawFileKey =
@@ -7000,7 +6983,7 @@ const AgentManagementHandlersLive = HttpApiBuilder.group(
 								yield* deleteRejectedUpload();
 								return yield* forbidden(
 									requestId,
-									AGENT_UPLOAD_PLAN_LIMIT_MESSAGE,
+									AGENT_UPLOAD_INVALID_DURATION_MESSAGE,
 								);
 							}
 							acceptedRawFileKey = decision.rawFileKey;

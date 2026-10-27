@@ -64,7 +64,7 @@ export const openSourceScreenRecorderContent: SeoPageContent = {
 				icon: <Zap fill="yellow" className="mb-4 size-8" strokeWidth={1.5} />,
 				title: "Instant Mode",
 				description:
-					"Record and share instantly with a link ready the moment you stop. Perfect for bug reports, async updates, and quick team communication. Free plan includes recordings up to 5 minutes with built-in thread commenting.",
+					"Record and share instantly with a link ready the moment you stop. Perfect for bug reports, async updates, and quick team communication. Free plan includes unlimited recording length with built-in thread commenting.",
 			},
 			{
 				icon: (
@@ -226,7 +226,7 @@ export const openSourceScreenRecorderContent: SeoPageContent = {
 		},
 		{
 			question: "Is Cap's open source version free?",
-			answer: `Yes. Cap's Studio Mode is completely free for personal use with no time limits and no watermarks. Instant Mode on the free plan supports recordings up to 5 minutes. Cap Pro ($${PRICING.pro.annualPerMonth}/month) removes Instant Mode time limits and adds team features. The core software will always be open source and free to use.`,
+			answer: `Yes. Cap's Studio and Instant Modes are free for personal use with no time limits and no watermarks. Cap Pro ($${PRICING.pro.annualPerMonth}/month) adds team features. The core software will always be open source and free to use.`,
 		},
 		{
 			question:

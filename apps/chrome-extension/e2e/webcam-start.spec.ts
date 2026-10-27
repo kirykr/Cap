@@ -91,7 +91,7 @@ const createMockCapServer = async () => {
 			sendJson(response, 200, {
 				user: { id: "user-e2e", email: "e2e@cap.test" },
 				organization: { id: "org-e2e", name: "E2E" },
-				plan: { isPro: true, maxRecordingSeconds: 600 },
+				plan: { isPro: true },
 			});
 			return;
 		}
@@ -215,7 +215,7 @@ const configureExtension = async (
 							bootstrap: {
 								user: { id: "user-e2e", email: "e2e@cap.test" },
 								organization: { id: "org-e2e", name: "E2E" },
-								plan: { isPro: true, maxRecordingSeconds: 600 },
+								plan: { isPro: true },
 							},
 							cachedAt: Date.now(),
 						},

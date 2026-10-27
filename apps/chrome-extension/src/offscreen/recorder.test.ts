@@ -177,7 +177,7 @@ const start = async (
 		auth: { authApiKey: "test", userId: "user-test" },
 		bootstrap: {
 			organization: { id: "org-test" },
-			plan: { isPro: true, maxRecordingSeconds: null },
+			plan: { isPro: true },
 		},
 	});
 };

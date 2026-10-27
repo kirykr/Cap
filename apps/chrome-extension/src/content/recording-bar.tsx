@@ -51,7 +51,6 @@ import { DrawingOverlay } from "./drawing-overlay";
 const EDGE_PADDING = 16;
 const BOTTOM_OFFSET = 28;
 const POLL_INTERVAL_MS = 5000;
-const WARNING_THRESHOLD_MS = 60_000;
 const LOGO_URL = chrome.runtime.getURL("icons/icon-48.png");
 
 type BarStatus = {
@@ -670,14 +669,7 @@ export function RecordingBarOverlay({
 	}
 
 	const isPaused = status?.phase === "paused";
-	const maxMs =
-		plan && !plan.isPro && plan.maxRecordingSeconds !== null
-			? plan.maxRecordingSeconds * 1000
-			: null;
 	const durationMs = status ? currentDurationMs(status, now) : 0;
-	const displayMs =
-		maxMs !== null ? Math.max(0, maxMs - durationMs) : durationMs;
-	const isWarning = maxMs !== null && displayMs <= WARNING_THRESHOLD_MS;
 	const dockOpensUp = position === null || position.y > 340;
 	const tooltipOnRight = position !== null && position.x < 120;
 
@@ -906,13 +898,8 @@ export function RecordingBarOverlay({
 					</div>
 
 					{countdownValue === null && status ? (
-						<span
-							className={classNames(
-								"cap-extension-recording-badge-time",
-								isWarning && "is-warning",
-							)}
-						>
-							{formatDuration(displayMs)}
+						<span className="cap-extension-recording-badge-time">
+							{formatDuration(durationMs)}
 						</span>
 					) : null}
 				</button>

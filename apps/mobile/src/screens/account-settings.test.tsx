@@ -209,7 +209,7 @@ describe("AccountScreen", () => {
 		auth.value.signOut.mockResolvedValue(undefined);
 	});
 
-	it("shows the Free plan limit without an external purchase action", async () => {
+	it("shows unlimited recording time on the Free plan without an external purchase action", async () => {
 		const renderer = await renderComponent(React.createElement(AccountScreen));
 		const text = getTextNodes(renderer.toJSON());
 		const [freePlan] = renderer.root.findAllByProps({
@@ -218,7 +218,7 @@ describe("AccountScreen", () => {
 
 		expect(freePlan).toBeDefined();
 		expect(text).toContain("Free plan");
-		expect(text).toContain("Free plan · Recordings are limited to 5 minutes");
+		expect(text).toContain("Unlimited recording time");
 		expect(
 			renderer.root.findAllByProps({
 				accessibilityLabel: "Upgrade to Cap Pro",

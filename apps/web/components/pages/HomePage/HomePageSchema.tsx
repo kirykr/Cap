@@ -17,7 +17,7 @@ const homePageFAQs = [
 	},
 	{
 		question: "How much does Cap cost?",
-		answer: `Cap offers a generous free plan with Studio mode for personal use and 5-minute shareable links. The Pro plan starts at just $${PRICING.pro.annualPerMonth}/month per user, which is less than half the price of Loom.`,
+		answer: `Cap offers a generous free plan with Studio mode for personal use and shareable recordings of unlimited length. The Pro plan starts at just $${PRICING.pro.annualPerMonth}/month per user, which is less than half the price of Loom.`,
 	},
 	{
 		question: "Is Cap available for Windows and Mac?",

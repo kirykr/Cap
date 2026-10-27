@@ -110,7 +110,8 @@ export const createSoftwareApplicationSchema = (
 				price: "0",
 				priceCurrency: "USD",
 				name: "Free Plan",
-				description: "Studio mode for personal use, 5-minute shareable links",
+				description:
+					"Studio and Instant modes for personal use, unlimited recording time",
 			},
 			{
 				"@type": "Offer",

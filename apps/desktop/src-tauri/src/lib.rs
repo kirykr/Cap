@@ -5209,10 +5209,6 @@ async fn upload_exported_video(
     let metadata = build_video_meta(&file_path)
         .map_err(|err| format!("Error getting output video meta: {err}"))?;
 
-    if !auth.is_upgraded() && metadata.duration_in_secs > 300.0 {
-        return Ok(UploadResult::UpgradeRequired);
-    }
-
     channel.send(UploadProgress { progress: 0.0 }).ok();
 
     let existing_video_id = upload::reusable_video_id(meta.sharing.as_ref(), meta.upload.as_ref());

@@ -178,7 +178,7 @@ const studioModeConfig: FeaturePageConfig = {
 						"Automatic transcriptions",
 						"Comment & feedback tools",
 						"Team collaboration",
-						"5-minute free recordings",
+						"Unlimited recording length",
 						"Browser-based viewing",
 					],
 					bestFor: "Quick updates, feedback, team communication",

@@ -17,20 +17,10 @@ import { UserId } from "./User.ts";
 import { UploadPhase, VideoId } from "./Video.ts";
 
 const isExpoAuthPath = (pathname: string) => pathname === "/--/auth";
-export const mobileFreeRecordingDurationSeconds = 5 * 60;
-export const mobileRecordingDurationToleranceSeconds = 5;
-
-export const isMobileRecordingDurationAllowed = ({
-	durationSeconds,
-	isPro,
-}: {
-	durationSeconds: number;
-	isPro: boolean;
-}) =>
-	isPro ||
-	durationSeconds <=
-		mobileFreeRecordingDurationSeconds +
-			mobileRecordingDurationToleranceSeconds;
+export const isMobileRecordingDurationValid = (durationSeconds: number) =>
+	Number.isFinite(durationSeconds) &&
+	durationSeconds > 0 &&
+	durationSeconds <= 43_200;
 
 export const isMobileAuthRedirectUri = (redirectUri: string) => {
 	try {

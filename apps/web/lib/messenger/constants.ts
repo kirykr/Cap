@@ -85,9 +85,9 @@ PLATFORM SUPPORT:
 - Linux: not yet supported, but it's on the roadmap.
 
 PRICING (early adopter beta pricing, locked in for lifetime of subscription):
-- Free plan: personal use, Studio Mode, unlimited local recordings, shareable links up to 5 minutes, export to MP4 or GIF, web recorder
-- Desktop License: $58/£58/€58 one-time (lifetime) or $29/£29/€29 per year, commercial usage rights, Studio Mode with full editor, unlimited local recordings, shareable links up to 5 minutes, export to MP4 or GIF. Currency is selected automatically at checkout, exactly the same way as Cap Pro.
-- Cap Pro: $12/£12/€12 per user per month (billed monthly) or $98/£98/€98 per user per year (billed annually, which works out to $8.16/£8.16/€8.16 per user per month), includes everything in Desktop License plus unlimited cloud storage and bandwidth, unlimited shareable links (no 5-minute limit), auto-generated AI titles/summaries/chapters/transcriptions, custom domain (cap.yourdomain.com), password-protected shares, viewer analytics, team workspaces, Loom video importer, custom S3 bucket and Google Drive support, priority support
+- Free plan: personal use, Studio Mode, unlimited local recordings, shareable links with unlimited recording duration, export to MP4 or GIF, web recorder
+- Desktop License: $58/£58/€58 one-time (lifetime) or $29/£29/€29 per year, commercial usage rights, Studio Mode with full editor, unlimited local recordings, shareable links with unlimited recording duration, export to MP4 or GIF. Currency is selected automatically at checkout, exactly the same way as Cap Pro.
+- Cap Pro: $12/£12/€12 per user per month (billed monthly) or $98/£98/€98 per user per year (billed annually, which works out to $8.16/£8.16/€8.16 per user per month), includes everything in Desktop License plus unlimited cloud storage and bandwidth, unlimited shareable links, auto-generated AI titles/summaries/chapters/transcriptions, custom domain (cap.yourdomain.com), password-protected shares, viewer analytics, team workspaces, Loom video importer, custom S3 bucket and Google Drive support, priority support
 - Currency (applies to both Cap Pro and the Desktop License): the price is the same number in every currency, only the symbol changes. UK customers are billed in GBP and eurozone customers in EUR, selected automatically at checkout from the customer's location. Everyone else is billed in USD. There is nothing the customer needs to do to pick a currency.
 - Cap is fully self-serve. Cap Pro is the plan, with optional add-ons that can be added anytime from organization settings in the dashboard. No enterprise plan or sales call is required.
 - Cap supports organizations with thousands of members, with enterprise capabilities including SOC 2 Type II, ISO 27001, and HIPAA compliance, custom storage, and volume discounts.
@@ -98,7 +98,7 @@ PRICING (early adopter beta pricing, locked in for lifetime of subscription):
 - Student discount available at https://cap.so/student-discount
 
 RECORDING MODES (DESKTOP APP):
-1. Instant Mode: records and uploads in real-time simultaneously. When you stop recording, the shareable link is ready within seconds. AI auto-generates captions, title, summary, and chapters (Pro). Perfect for quick feedback, bug reports, and async communication. Free users limited to 5 minutes; Pro users have unlimited length.
+1. Instant Mode: records and uploads in real-time simultaneously. When you stop recording, the shareable link is ready within seconds. AI auto-generates captions, title, summary, and chapters (Pro). Perfect for quick feedback, bug reports, and async communication. All plans support unlimited recording length.
 2. Studio Mode: records locally to your machine with no time limits. After recording, opens in the full editor with timeline, backgrounds, effects, cursor styling, text overlays, zoom, and more. Export to MP4 or GIF. Can pause/resume during recording. Supports crash-recoverable recording (fragmented segments that can be recovered if the app crashes).
 3. Screenshot Mode: capture a screenshot of your entire screen, a specific window, or a custom area. Opens in the screenshot editor with cropping, annotations (text, shapes, arrows, drawing, masking), custom backgrounds, padding, rounding, shadows, and borders. Export to file or copy to clipboard.
 

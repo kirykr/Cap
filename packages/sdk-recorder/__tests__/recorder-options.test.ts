@@ -144,7 +144,7 @@ afterEach(() => {
 });
 
 test.each([
-	{ constructorLimit: undefined, startLimit: undefined, expected: 14_400_000 },
+	{ constructorLimit: undefined, startLimit: undefined, expected: undefined },
 	{ constructorLimit: 1500, startLimit: undefined, expected: 1500 },
 	{ constructorLimit: 1500, startLimit: 700, expected: 700 },
 	{ constructorLimit: 1500, startLimit: 0, expected: 0 },
@@ -166,9 +166,11 @@ test.each([
 	try {
 		await recorder.start({ maxDurationMs: scenario.startLimit });
 		expect(recorder.phase).toBe("recording");
-		expect(schedule.mock.calls).toEqual([
-			[expect.any(Function), scenario.expected],
-		]);
+		expect(schedule.mock.calls).toEqual(
+			scenario.expected === undefined
+				? []
+				: [[expect.any(Function), scenario.expected]],
+		);
 	} finally {
 		recorder.destroy();
 	}
